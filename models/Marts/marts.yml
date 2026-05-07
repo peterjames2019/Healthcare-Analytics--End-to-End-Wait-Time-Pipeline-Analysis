@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: fct_medical_visits
+    description: "Fact table for healthcare clinic visits, tracking wait times and patient demographics."
+    columns:
+      - name: appointment_id
+        description: "Primary key. One row per appointment."
+        tests:
+          - unique
+          - not_null
+
+      - name: wait_time_minutes
+        description: "Minutes elapsed from check-in to vitals completion."
+        tests:
+          - not_null
