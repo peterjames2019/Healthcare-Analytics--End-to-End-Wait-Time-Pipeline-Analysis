@@ -32,10 +32,9 @@ final_joined as (
         
         -- Calculate wait time from check-in to vitals completion
     ROUND(
-        (EXTRACT(minute FROM (vitals_completed_at - check_in_at)) + 
-        EXTRACT(second FROM (vitals_completed_at - check_in_at)) / 60.0)::numeric, 
-        0
-    ) as wait_time_minutes
+            (extract(epoch from (e.vitals_completed_at - e.check_in_at)) / 60.0)::numeric, 
+            1
+        ) as wait_time_minutes
 
     from appointments a
     left join patients p on a.patient_id = p.patient_id
